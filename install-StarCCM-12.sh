@@ -1,10 +1,13 @@
 #!/bin/bash
+
+set -x
+
 SHARE_HOME=$1
 LICIP=$2
 HOST=`hostname`
 DOWN=$3
 SHARE_DATA=$4
-echo $USER,$LICIP,$HOST,$DOWN
+echo $SHARE_HOME,$LICIP,$HOST,$DOWN
 
 
 wget -q http://azbenchmarkstorage.blob.core.windows.net/cdadapcobenchmarkstorage/runAndRecord.java -O $SHARE_DATA/benchmark/runAndRecord.java

@@ -49,6 +49,7 @@ install_pkgs()
     yum -y install epel-release
     #yum -y install zlib zlib-devel bzip2 bzip2-devel bzip2-libs openssl openssl-devel openssl-libs gcc gcc-c++ nfs-utils rpcbind mdadm wget python-pip
     yum -y install nfs-utils sshpass nmap htop npm
+    yum groupinstall -y "X Window System"
 }
 
 # Creates and exports two shares on the master nodes:
@@ -82,6 +83,8 @@ setup_shares()
         systemctl start nfs-lock
         systemctl start nfs-idmap
         systemctl restart nfs-server
+
+        wget https://raw.githubusercontent.com/tanewill/AHOD-HPC/master/full-pingpong.sh -O $SHARE_DATA/full-pingpong.sh
     
     else
         echo mounting
@@ -192,7 +195,7 @@ install_solver()
 {
     if is_master; then
         chmod +x install-$SOLVER.sh
-        source install-$SOLVER.sh $SHARE_HOME $LICIP $DOWN $SHARE_DATA
+        source install-$SOLVER.sh $SHARE_HOME/$HPC_USER $LICIP $DOWN $SHARE_DATA
     else
         echo 'not master'
     fi
