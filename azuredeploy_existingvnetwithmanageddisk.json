@@ -49,6 +49,21 @@
 				"description": "Number of VM instances (100 or less)."
 			}
 		},
+        "dataDiskSize": {		
+            "type": "int",		
+            "defaultValue": 128,		
+            "metadata": {		
+                "description": "The size in GB of each of 16 data disks that are attached to the VM.  A RAID-0 volume is created with all data disks that is dataDiskSize * dataDiskCount in size."		
+            }		
+        },		
+        "nbDataDisks": {		
+            "type": "int",		
+            "defaultValue": 8,		
+            "maxValue": 16,		
+            "metadata": {		
+                "description": "The number of disks to attach to the NFS server."		
+            }		
+        },	
 		"adminUsername": {
 			"type": "String",
 			"metadata": {
@@ -137,7 +152,89 @@
 		"publicIPAddressID": "[resourceId('Microsoft.Network/publicIPAddresses',variables('publicIPAddressName'))]",
 		"nicName": "[concat(variables('namingInfix'), 'nic')]",
 		"ipConfigName": "[concat(variables('namingInfix'), 'ipconfig')]",
-		"scriptUrl": "https://raw.githubusercontent.com/tanewill/AHOD-HPC/master/",
+        "dataDiskArray": [		
+        {		
+            "diskSizeGB": "[parameters('datadiskSize')]",		
+            "lun": "0",		
+            "createOption": "Empty"		
+      },		
+      {		
+        "diskSizeGB": "[parameters('datadiskSize')]",		
+        "lun": "1",		
+        "createOption": "Empty"		
+      },		
+      {		
+        "diskSizeGB": "[parameters('datadiskSize')]",		
+        "lun": "2",		
+        "createOption": "Empty"		
+      },		
+      {		
+        "diskSizeGB": "[parameters('datadiskSize')]",		
+        "lun": "3",		
+        "createOption": "Empty"		
+      },		
+      {		
+        "diskSizeGB": "[parameters('datadiskSize')]",		
+        "lun": "4",		
+        "createOption": "Empty"		
+      },		
+      {		
+        "diskSizeGB": "[parameters('datadiskSize')]",		
+        "lun": "5",		
+        "createOption": "Empty"		
+      },		
+      {		
+        "diskSizeGB": "[parameters('datadiskSize')]",		
+        "lun": "6",		
+        "createOption": "Empty"		
+      },		
+      {		
+        "diskSizeGB": "[parameters('datadiskSize')]",		
+        "lun": "7",		
+        "createOption": "Empty"		
+      },		
+      {		
+        "diskSizeGB": "[parameters('datadiskSize')]",		
+        "lun": "8",		
+        "createOption": "Empty"		
+      },		
+      {		
+        "diskSizeGB": "[parameters('datadiskSize')]",		
+        "lun": "9",		
+        "createOption": "Empty"		
+      },		
+      {		
+        "diskSizeGB": "[parameters('datadiskSize')]",		
+        "lun": "10",		
+        "createOption": "Empty"		
+      },		
+      {		
+        "diskSizeGB": "[parameters('datadiskSize')]",		
+        "lun": "11",		
+        "createOption": "Empty"		
+      },		
+      {		
+        "diskSizeGB": "[parameters('datadiskSize')]",		
+        "lun": "12",		
+        "createOption": "Empty"		
+      },		
+      {		
+        "diskSizeGB": "[parameters('datadiskSize')]",		
+        "lun": "13",		
+        "createOption": "Empty"		
+      },		
+      {		
+        "diskSizeGB": "[parameters('datadiskSize')]",		
+        "lun": "14",		
+        "createOption": "Empty"		
+      },		
+      {		
+        "diskSizeGB": "[parameters('datadiskSize')]",		
+        "lun": "15",		
+        "createOption": "Empty"		
+      }		
+    ],				
+		"scriptUrl": "https://raw.githubusercontent.com/hirtanak/AHOD-HPC/master/",
 		"cnSetupScript": "cn-setup.sh",
 		"hnSetupScript": "hn-setup.sh",
 		"osType": {
@@ -235,17 +332,15 @@
 				"adminUsername": "[parameters('adminUsername')]",
 				"adminPassword": "[parameters('adminPassword')]"
 			},
-			"storageProfile": {
-				"imageReference": "[variables('imageReference')]",
-				"osDisk": {
-					"name": "[variables('jumpBoxOSDiskName')]",
-					"vhd": {
-						"uri": "[concat('http://',variables('jumpBoxSAName'),'.blob.core.windows.net/',variables('jumpBoxVHDContainerName'),'/',variables('jumpBoxOSDiskName'),'.vhd')]"
-					},
-					"caching": "ReadWrite",
-					"createOption": "FromImage"
-				}
-			},
+            "storageProfile": {
+                "imageReference": "[variables('MasterimageReference')]",
+                "osDisk": {
+                    "caching": "ReadOnly",
+                    "createOption": "FromImage",
+                    "managedDisk": {
+                        "storageAccountType": "Premium_LRS"
+                    }
+                },       
 			"networkProfile": {
 				"networkInterfaces": [{
 					"id": "[resourceId('Microsoft.Network/networkInterfaces',variables('jumpBoxNicName'))]"
@@ -302,21 +397,16 @@
 				"mode": "Manual"
 			},
 			"virtualMachineProfile": {
-				"storageProfile": {
-					"osDisk": {
-						"vhdContainers": [
-							"[concat('https://', variables('uniqueStringArray')[0], variables('newStorageAccountSuffix'), '.blob.core.windows.net/', variables('vhdContainerName'))]",
-							"[concat('https://', variables('uniqueStringArray')[1], variables('newStorageAccountSuffix'), '.blob.core.windows.net/', variables('vhdContainerName'))]",
-							"[concat('https://', variables('uniqueStringArray')[2], variables('newStorageAccountSuffix'), '.blob.core.windows.net/', variables('vhdContainerName'))]",
-							"[concat('https://', variables('uniqueStringArray')[3], variables('newStorageAccountSuffix'), '.blob.core.windows.net/', variables('vhdContainerName'))]",
-							"[concat('https://', variables('uniqueStringArray')[4], variables('newStorageAccountSuffix'), '.blob.core.windows.net/', variables('vhdContainerName'))]"
-						],
-						"name": "[variables('osDiskName')]",
-						"caching": "ReadOnly",
-						"createOption": "FromImage"
-					},
-					"imageReference": "[variables('imageReference')]"
-				},
+                "storageProfile": {
+                    "imageReference": "[variables('imageReference')]",  
+                    "osDisk": {
+                        "caching": "ReadOnly",
+                        "createOption": "FromImage",
+                        "managedDisk": {
+                            "storageAccountType": "Standard_LRS"
+                        }
+                    }
+                },
 				"osProfile": {
 					"computerNamePrefix": "[variables('namingInfix')]",
 					"adminUsername": "[parameters('adminUsername')]",
