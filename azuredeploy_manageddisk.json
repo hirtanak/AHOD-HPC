@@ -225,7 +225,7 @@
       }
     ],
 
-		"scriptUrl": "https://raw.githubusercontent.com/tanewill/AHOD-HPC/master/",
+		"scriptUrl": "https://raw.githubusercontent.com/hirtanak/AHOD-HPC/master/",
 		"cnSetupScript": "cn-setup.sh",
 		"hnSetupScript": "hn-setup.sh",
 		"osType": {
