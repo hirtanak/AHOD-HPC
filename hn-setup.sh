@@ -27,8 +27,9 @@ mkdir /mnt/resource/scratch/applications
 mkdir /mnt/resource/scratch/INSTALLERS
 mkdir /mnt/resource/scratch/benchmark
 
-ln -s /opt/intel/impi/5.1.3.181/intel64/bin/ /opt/intel/impi/5.1.3.181/bin
-ln -s /opt/intel/impi/5.1.3.181/lib64/ /opt/intel/impi/5.1.3.181/lib
+#ln -s /opt/intel/impi/5.1.3.181/intel64/bin/ /opt/intel/impi/5.1.3.181/bin
+#ln -s /opt/intel/impi/5.1.3.181/lib64/ /opt/intel/impi/5.1.3.181/lib
+source /opt/intel/compilers_and_libraries_2017.2.174/linux/mpi/bin64/mpivars.sh 
 
 wget http://dl.fedoraproject.org/pub/epel/7/x86_64/e/epel-release-7-10.noarch.rpm
 
