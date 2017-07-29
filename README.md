@@ -51,7 +51,7 @@ Deploy using JSON copy and common home
 <td align="center">
 Deploy cluster to an New VNet with Managed Disk
 <br><br>
-<a href="https://portal.azure.com/#create/Microsoft.Template/uri/https%3A%2F%2Fraw.githubusercontent.com%2Fhirtanak%2FAHOD-HPC%2Fmaster%2Fazuredeploywithmanageddisk.json" target="_blank">
+<a href="https://portal.azure.com/#create/Microsoft.Template/uri/https%3A%2F%2Fraw.githubusercontent.com%2Fhirtanak%2FAHOD-HPC%2Fmaster%2Fazuredeploy_manageddisk.json" target="_blank">
     <img src="http://azuredeploy.net/deploybutton.png" />
 </a>
 </td>
