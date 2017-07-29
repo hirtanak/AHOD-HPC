@@ -53,14 +53,14 @@
 		},
         "dataDiskSize": {
             "type": "int",
-            "defaultValue": 128,
+            "defaultValue": 512,
             "metadata": {
                 "description": "The size in GB of each of 16 data disks that are attached to the VM.  A RAID-0 volume is created with all data disks that is dataDiskSize * dataDiskCount in size."
             }
         },
         "nbDataDisks": {
             "type": "int",
-            "defaultValue": 8,
+            "defaultValue": 12,
             "maxValue": 16,
             "metadata": {
                 "description": "The number of disks to attach to the NFS server."
