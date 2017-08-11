@@ -4,14 +4,14 @@ Azure Resource Manager Templates for Ad-Hoc On-Demand HPC clusters
 <table>
 <tr>
 <td align="center">
-Deploy cluster with a new VNet
+Deploy cluster with a new VNET
 <br><br>
 <a href="https://portal.azure.com/#create/Microsoft.Template/uri/https%3A%2F%2Fraw.githubusercontent.com%2Ftanewill%2FAHOD-HPC%2Fmaster%2Fazuredeploy.json" target="_blank">
     <img src="http://azuredeploy.net/deploybutton.png" />
 </a>
 </td>
 <td align="center">
-Deploy cluster to an existing VNet
+Deploy cluster to an existing VNET
 <br><br>
 <a href="https://portal.azure.com/#create/Microsoft.Template/uri/https%3A%2F%2Fraw.githubusercontent.com%2Ftanewill%2FAHOD-HPC%2Fmaster%2Fazuredeploy_existingvnet.json" target="_blank">
     <img src="http://azuredeploy.net/deploybutton.png" />
@@ -49,16 +49,16 @@ Deploy using JSON copy and common home
 </td></tr>
 <tr>
 <td align="center">
-Deploy cluster to an New VNet with Managed Disk
+Deploy cluster to an New VNET with Managed Disk
 <br><br>
 <a href="https://portal.azure.com/#create/Microsoft.Template/uri/https%3A%2F%2Fraw.githubusercontent.com%2Fhirtanak%2FAHOD-HPC%2Fmaster%2Fazuredeploy_manageddisk.json" target="_blank">
     <img src="http://azuredeploy.net/deploybutton.png" />
 </a>
 </td>
 <td align="center">
-Deploy cluster to an existing VNet with Managed Disk
+Deploy cluster to an New VNET with Managed Disk, HeadNode DS4_V2 with Premium Disk
 <br><br>
-<a href="https://portal.azure.com/#create/Microsoft.Template/uri/https%3A%2F%2Fraw.githubusercontent.com%2Fhirtanak%2FAHOD-HPC%2Fmaster%2Fazuredeploy_existingvnetwithmanageddisk.json" target="_blank">
+<a href="https://portal.azure.com/#create/Microsoft.Template/uri/https%3A%2F%2Fraw.githubusercontent.com%2Fhirtanak%2FAHOD-HPC%2Fmaster%2Fazuredeploy_manageddisk2.json" target="_blank">
     <img src="http://azuredeploy.net/deploybutton.png" />
 </a>
 </td></tr>
