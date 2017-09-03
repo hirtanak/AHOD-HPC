@@ -129,7 +129,7 @@
 		"imageReference": "[variables('osType')]",
 		"JBoxType": {
 			"publisher": "OpenLogic",
-			"offer": "CentOS",
+			"offer": "CentOS-HPC",
 			"sku": "7.1",
 			"version": "latest"
 		},
