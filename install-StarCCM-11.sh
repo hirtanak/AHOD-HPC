@@ -5,7 +5,7 @@ HOST=`hostname`
 DOWN=$3
 echo $USER,$LICIP,$HOST,$DOWN
 mkdir -p /mnt/resource/scratch/
-mkdir -o /mnt/resource/scratch/applications
+mkdir -p /mnt/resource/scratch/applications
 mkdir -p /mnt/resource/scratch/INSTALLERS
 mkdir -p /mnt/resource/scratch/benchmark
 
