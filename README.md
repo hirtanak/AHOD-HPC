@@ -62,6 +62,20 @@ Deploy cluster to an New VNET with Managed Disk, HeadNode DS4_V2 with Premium Di
     <img src="http://azuredeploy.net/deploybutton.png" />
 </a>
 </td></tr>
+<tr>
+<td align="center">
+Deploy cluster to an New VNET with Managed Disk 20171011
+<br><br>
+<a href="https://portal.azure.com/#create/Microsoft.Template/uri/https%3A%2F%2Fraw.githubusercontent.com%2Fhirtanak%2FAHOD-HPC%2Fmaster%2Fazuredeploy_manageddisk3.json" target="_blank">
+    <img src="http://azuredeploy.net/deploybutton.png" />
+</a>
+</td>
+<td align="center">
+<br><br>
+<a href="https://portal.azure.com/#create/Microsoft.Template/uri/https%3A%2F%2Fraw.githubusercontent.com%2Fhirtanak%2FAHOD-HPC%2Fmaster%2Fazuredeploy_manageddisk4.json" target="_blank">
+    <img src="http://azuredeploy.net/deploybutton.png" />
+</a>
+</td></tr>
 
 </table>
 <br></br>
