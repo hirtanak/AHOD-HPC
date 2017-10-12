@@ -1,21 +1,3 @@
-Skip to content
-This repository
-Search
-Pull requests
-Issues
-Marketplace
-Explore
- @hirtanak
- Sign out
- Unwatch 4
-  Star 2  Fork 6 tanewill/AHOD-HPC
- Code  Issues 0  Pull requests 0  Projects 0  Wiki  Insights
-Branch: master Find file Copy pathAHOD-HPC/scripts/hn-setup.sh
-86ee2f9  12 days ago
-@tanewill tanewill updates for debugging
-1 contributor
-RawBlameHistory     
-123 lines (95 sloc)  4.45 KB
 #!/bin/bash
 set -x
 
