@@ -118,17 +118,3 @@ sed -i 's/^Defaults[ ]*requiretty/# Defaults requiretty/g' /etc/sudoers
 name=`head -1 /home/$USER/bin/hostips`
 cat install-$SOLVER.sh | sshpass -p "$PASS" ssh $USER@$name "cat >> /home/$USER/install-$SOLVER.sh"
 sshpass -p $PASS ssh -t -t -o ConnectTimeout=2 $USER@$name source install-$SOLVER.sh $USER $LICIP $DOWN > script_output
-
-
-© 2017 GitHub, Inc.
-Terms
-Privacy
-Security
-Status
-Help
-Contact GitHub
-API
-Training
-Shop
-Blog
-About
