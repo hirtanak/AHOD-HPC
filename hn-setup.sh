@@ -1,4 +1,24 @@
+Skip to content
+This repository
+Search
+Pull requests
+Issues
+Marketplace
+Explore
+ @hirtanak
+ Sign out
+ Unwatch 4
+  Star 2  Fork 6 tanewill/AHOD-HPC
+ Code  Issues 0  Pull requests 0  Projects 0  Wiki  Insights
+Branch: master Find file Copy pathAHOD-HPC/scripts/hn-setup.sh
+86ee2f9  12 days ago
+@tanewill tanewill updates for debugging
+1 contributor
+RawBlameHistory     
+123 lines (95 sloc)  4.45 KB
 #!/bin/bash
+set -x
+
 SOLVER=$1
 USER=$2
 PASS=$3
@@ -8,43 +28,52 @@ LICIP=$5
 
 IP=`ifconfig eth0 | grep -Eo 'inet (addr:)?([0-9]*\.){3}[0-9]*' | grep -Eo '([0-9]*\.){3}[0-9]*' | grep -v '127.0.0.1'`
 localip=`echo $IP | cut --delimiter='.' -f -3`
+myhost=`hostname`
 
 echo User is: $USER
 echo Pass is: $PASS
 echo License IP is: $LICIP
 echo Model is: $DOWN
 
-echo "*               hard    memlock         unlimited" >> /etc/security/limits.conf
-echo "*               soft    memlock         unlimited" >> /etc/security/limits.conf
+cat << EOF >> /etc/security/limits.conf
+*               hard    memlock         unlimited
+*               soft    memlock         unlimited
+EOF
 
+#Create directories needed for configuration
 mkdir -p /home/$USER/.ssh
 mkdir -p /home/$USER/bin
-mkdir -p /mnt/resource/scratch
-mkdir -p /mnt/nfsshare
+mkdir -p /mnt/resource/scratch/applications
+mkdir -p /mnt/resource/scratch/INSTALLERS
+mkdir -p /mnt/resource/scratch/benchmark
+mkdir -p /mnt/lts
 
-mkdir /mnt/resource/scratch/
-mkdir /mnt/resource/scratch/applications
-mkdir /mnt/resource/scratch/INSTALLERS
-mkdir /mnt/resource/scratch/benchmark
 
-#ln -s /opt/intel/impi/5.1.3.181/intel64/bin/ /opt/intel/impi/5.1.3.181/bin
-#ln -s /opt/intel/impi/5.1.3.181/lib64/ /opt/intel/impi/5.1.3.181/lib
-source /opt/intel/compilers_and_libraries_2017.2.174/linux/mpi/bin64/mpivars.sh 
+ln -s /mnt/resource/scratch/ /home/$USER/scratch
+ln -s /mnt/lts /home/$USER/lts
 
-wget http://dl.fedoraproject.org/pub/epel/7/x86_64/e/epel-release-7-10.noarch.rpm
+#Following lines are only needed if the head node is an RDMA connected VM
+#impi_version=`ls /opt/intel/impi`
+#source /opt/intel/impi/${impi_version}/bin64/mpivars.sh
+#ln -s /opt/intel/impi/${impi_version}/intel64/bin/ /opt/intel/impi/${impi_version}/bin
+#ln -s /opt/intel/impi/${impi_version}/lib64/ /opt/intel/impi/${impi_version}/lib
 
-rpm -ivh epel-release-7-10.noarch.rpm
-yum install -y -q nfs-utils sshpass nmap htop npm
+#Install needed packages
+yum check-update
+yum install -y -q epel-release
+yum install -y -q nfs-utils sshpass nmap htop pdsh screen git psmisc
+yum install -y gcc libffi-devel python-devel openssl-devel --disableexcludes=all
 yum groupinstall -y "X Window System"
-npm install -g azure-cli
 
-myhost=`hostname`
+#install az cli
+curl -L https://aka.ms/InstallAzureCli | bash
+
+#Use ganglia install script to install ganglia, this is downloaded via the ARM template
 chmod +x install_ganglia.sh
 ./install_ganglia.sh $myhost azure 8649
 
-echo "/mnt/nfsshare $localip.*(rw,sync,no_root_squash,no_all_squash)" | tee -a /etc/exports
+#Setup the NFS server
 echo "/mnt/resource/scratch $localip.*(rw,sync,no_root_squash,no_all_squash)" | tee -a /etc/exports
-chmod -R 777 /mnt/nfsshare/
 systemctl enable rpcbind
 systemctl enable nfs-server
 systemctl enable nfs-lock
@@ -58,11 +87,10 @@ systemctl restart nfs-server
 mv clusRun.sh cn-setup.sh /home/$USER/bin
 chmod +x /home/$USER/bin/*.sh
 chown $USER:$USER /home/$USER/bin
+nmap -sn $localip.* | grep $localip. | awk '{print $5}' > /home/$USER/bin/hostips
 
-nmap -sn $localip.* | grep $localip. | awk '{print $5}' > /home/$USER/bin/nodeips.txt
-myhost=`hostname -i`
-sed -i '/\<'$myhost'\>/d' /home/$USER/bin/nodeips.txt
-sed -i '/\<10.0.0.1\>/d' /home/$USER/bin/nodeips.txt
+sed -i '/\<'$IP'\>/d' /home/$USER/bin/hostips
+sed -i '/\<10.0.0.1\>/d' /home/$USER/bin/hostips
 
 echo -e  'y\n' | ssh-keygen -f /home/$USER/.ssh/id_rsa -t rsa -N ''
 echo 'Host *' >> /home/$USER/.ssh/config
@@ -75,37 +103,29 @@ echo 'Host *' >> ~/.ssh/config
 echo 'StrictHostKeyChecking no' >> ~/.ssh/config
 chmod 400 ~/.ssh/config
 
-for NAME in `cat /home/$USER/bin/nodeips.txt`; do sshpass -p $PASS ssh -o ConnectTimeout=2 $USER@$NAME 'hostname' >> /home/$USER/bin/nodenames.txt;done
+for NAME in `cat /home/$USER/bin/hostips`; do sshpass -p $PASS ssh -o ConnectTimeout=2 $USER@$NAME 'hostname' >> /home/$USER/bin/hosts;done
+NAMES=`cat /home/$USER/bin/hostips` #names from names.txt file
 
-NAMES=`cat /home/$USER/bin/nodeips.txt` #names from names.txt file
-for NAME in $NAMES; do
-        sshpass -p $PASS scp -o "StrictHostKeyChecking no" -o ConnectTimeout=2 /home/$USER/bin/cn-setup.sh $USER@$NAME:/home/$USER/
-        sshpass -p $PASS scp -o "StrictHostKeyChecking no" -o ConnectTimeout=2 /home/$USER/bin/nodenames.txt $USER@$NAME:/home/$USER/
-        sshpass -p $PASS ssh -t -t -o ConnectTimeout=2 $USER@$NAME 'echo "'$PASS'" | sudo -S sh /home/'$USER'/cn-setup.sh '$IP $USER $myhost 
-        sshpass -p $PASS ssh -o ConnectTimeout=2 $USER@$NAME 'mkdir /home/'$USER'/.ssh && chmod 700 .ssh'
-        sshpass -p $PASS ssh -o ConnectTimeout=2 $USER@$NAME "echo -e  'y\n' | ssh-keygen -f .ssh/id_rsa -t rsa -N ''"
-        sshpass -p $PASS ssh -o ConnectTimeout=2 $USER@$NAME 'touch /home/'$USER'/.ssh/config'
-        sshpass -p $PASS ssh -o ConnectTimeout=2 $USER@$NAME 'echo "Host *" >  /home/'$USER'/.ssh/config'
-        sshpass -p $PASS ssh -o ConnectTimeout=2 $USER@$NAME 'echo StrictHostKeyChecking no >> /home/'$USER'/.ssh/config'
-        sshpass -p $PASS ssh -o ConnectTimeout=2 $USER@$NAME 'chmod 400 /home/'$USER'/.ssh/config'
-        cat /home/$USER/.ssh/id_rsa.pub | sshpass -p $PASS ssh -o ConnectTimeout=2 $USER@$NAME 'cat >> /home/'$USER'/.ssh/authorized_keys'
-        sshpass -p $PASS scp -o "StrictHostKeyChecking no" -o ConnectTimeout=2 $USER@$NAME:/home/$USER/.ssh/id_rsa.pub /home/$USER/.ssh/sub_node.pub
-
-        for SUBNODE in `cat /home/$USER/bin/nodeips.txt`; do
-                sshpass -p $PASS ssh -o ConnectTimeout=2 $USER@$SUBNODE 'mkdir -p .ssh'
-                cat /home/$USER/.ssh/sub_node.pub | sshpass -p $PASS ssh -o ConnectTimeout=2 $USER@$SUBNODE 'cat >> /home/'$USER'/.ssh/authorized_keys'
-        done
-        sshpass -p $PASS ssh -o ConnectTimeout=2 $USER@$NAME 'chmod 700 /home/'$USER'/.ssh/'
-        sshpass -p $PASS ssh -o ConnectTimeout=2 $USER@$NAME 'chmod 640 /home/'$USER'/.ssh/authorized_keys'
+for name in `cat /home/$USER/bin/hostips`; do
+        sshpass -p "$PASS" ssh $USER@$name "mkdir -p .ssh"
+        cat /home/$USER/.ssh/config | sshpass -p "$PASS" ssh $USER@$name "cat >> .ssh/config"
+        cat /home/$USER/.ssh/id_rsa | sshpass -p "$PASS" ssh $USER@$name "cat >> .ssh/id_rsa"
+        cat /home/$USER/.ssh/id_rsa.pub | sshpass -p "$PASS" ssh $USER@$name "cat >> .ssh/authorized_keys"
+        sshpass -p "$PASS" ssh $USER@$name "chmod 700 .ssh; chmod 640 .ssh/authorized_keys; chmod 400 .ssh/config; chmod 400 .ssh/id_rsa"
+        cat /home/$USER/bin/hostips | sshpass -p "$PASS" ssh $USER@$name "cat >> /home/$USER/hostips"
+        cat /home/$USER/bin/hosts | sshpass -p "$PASS" ssh $USER@$name "cat >> /home/$USER/hosts"
+        cat /home/$USER/bin/cn-setup.sh | sshpass -p "$PASS" ssh $USER@$name "cat >> /home/$USER/cn-setup.sh"
+        sshpass -p $PASS ssh -t -t -o ConnectTimeout=2 $USER@$name 'echo "'$PASS'" | sudo -S sh /home/'$USER'/cn-setup.sh '$IP $USER $myhost &
 done
 
-cp ~/.ssh/authorized_keys /home/$USER/.ssh/authorized_keys
-cp /home/$USER/bin/nodenames.txt /mnt/resource/scratch/hosts
+
+
+cp /home/$USER/bin/hosts /mnt/resource/scratch/hosts
 chown -R $USER:$USER /home/$USER/.ssh/
 chown -R $USER:$USER /home/$USER/bin/
 chown -R $USER:$USER /mnt/resource/scratch/
+chown -R $USER:$USER /mnt/lts
 chmod -R 744 /mnt/resource/scratch/
-
 
 # Don't require password for HPC user sudo
 echo "$USER ALL=(ALL) NOPASSWD: ALL" >> /etc/sudoers
@@ -113,7 +133,20 @@ echo "$USER ALL=(ALL) NOPASSWD: ALL" >> /etc/sudoers
 # Disable tty requirement for sudo
 sed -i 's/^Defaults[ ]*requiretty/# Defaults requiretty/g' /etc/sudoers
 
-chmod +x install-$SOLVER.sh
-source install-$SOLVER.sh $USER $LICIP $DOWN
+name=`head -1 /home/$USER/bin/hostips`
+cat install-$SOLVER.sh | sshpass -p "$PASS" ssh $USER@$name "cat >> /home/$USER/install-$SOLVER.sh"
+sshpass -p $PASS ssh -t -t -o ConnectTimeout=2 $USER@$name source install-$SOLVER.sh $USER $LICIP $DOWN > script_output
 
 
+© 2017 GitHub, Inc.
+Terms
+Privacy
+Security
+Status
+Help
+Contact GitHub
+API
+Training
+Shop
+Blog
+About
