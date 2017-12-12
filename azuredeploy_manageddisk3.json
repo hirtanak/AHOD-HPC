@@ -16,8 +16,7 @@
 				"StarCCM-10",
 				"StarCCM-11",
 				"StarCCM-12",
-				"CONVERGE-2-3",
-				"CONVERGE-2-4"
+				"Baseline201712"
 			],
 			"type": "String",
 			"metadata": {
