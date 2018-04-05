@@ -66,7 +66,7 @@ systemctl start nfs-lock
 systemctl start nfs-idmap
 systemctl restart nfs-server
 
-mv clusRun.sh cn-setup.sh /home/$USER/bin
+mv clusRun.sh cn-setup.sh install-$SOLVER.sh /home/$USER/bin
 chmod +x /home/$USER/bin/*.sh
 chown $USER:$USER /home/$USER/bin
 nmap -sn $localip.* | grep $localip. | awk '{print $5}' > /home/$USER/bin/hostips
@@ -115,6 +115,8 @@ echo "$USER ALL=(ALL) NOPASSWD: ALL" >> /etc/sudoers
 # Disable tty requirement for sudo
 sed -i 's/^Defaults[ ]*requiretty/# Defaults requiretty/g' /etc/sudoers
 
-name=`head -1 /home/$USER/bin/hostips`
-cat install-$SOLVER.sh | sshpass -p "$PASS" ssh $USER@$name "cat >> /home/$USER/install-$SOLVER.sh"
-sshpass -p $PASS ssh -t -t -o ConnectTimeout=2 $USER@$name source install-$SOLVER.sh $USER $LICIP $DOWN > script_output
+# run install the solver
+#name=`head -1 /home/$USER/bin/hostips`
+#cat install-$SOLVER.sh | sshpass -p "$PASS" ssh $USER@$name "cat >> /home/$USER/install-$SOLVER.sh"
+#sshpass -p $PASS ssh -t -t -o ConnectTimeout=2 $USER@$name source install-$SOLVER.sh $USER $LICIP $DOWN > script_output
+bash install-$SOLVER.sh
