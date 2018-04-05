@@ -45,14 +45,14 @@ yum check-update
 yum install -y -q epel-release
 yum install -y -q nfs-utils sshpass nmap htop pdsh screen git psmisc
 yum install -y gcc libffi-devel python-devel openssl-devel --disableexcludes=all
-yum groupinstall -y "X Window System"
+#yum groupinstall -y "X Window System"
 
 #install az cli
-curl -L https://aka.ms/InstallAzureCli | bash
+#curl -L https://aka.ms/InstallAzureCli | bash
 
 #Use ganglia install script to install ganglia, this is downloaded via the ARM template
-chmod +x install_ganglia.sh
-./install_ganglia.sh $myhost azure 8649
+#chmod +x install_ganglia.sh
+#./install_ganglia.sh $myhost azure 8649
 
 #Setup the NFS server
 echo "/mnt/resource/scratch $localip.*(rw,sync,no_root_squash,no_all_squash)" | tee -a /etc/exports
