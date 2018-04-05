@@ -129,8 +129,8 @@
 		"saCount": "[length(variables('uniqueStringArray'))]",
 		"vhdContainerName": "[concat(variables('namingInfix'), 'vhd')]",
 		"osDiskName":"[concat(variables('namingInfix'), 'osdisk')]",
-		"addressPrefix": "10.248.0.0/22",
-		"subnetPrefix": "10.248.1.0/25",
+		"addressPrefix": "10.0.0.0/24",
+		"subnetPrefix": "10.0.0.0/25",
 		"virtualNetworkName": "[concat(variables('namingInfix'), 'vnet')]",
 		"subnetName": "[concat(variables('namingInfix'), 'subnet')]",
 		"vnetID": "[resourceId('Microsoft.Network/virtualNetworks',variables('virtualNetworkName'))]",
@@ -244,7 +244,7 @@
 				"[concat(variables('scriptUrl'), 'cn-setup.sh')]",
 				"[concat(variables('scriptUrl'), 'hn-setup.sh')]",
 				"[concat(variables('scriptUrl'), 'clusRun.sh')]",
-				"[concat(variables('scriptUrl'), 'install-', parameters('solver'), '.sh')]"	
+				"[concat(variables('scriptUrl'), '/sovers/install-', parameters('solver'), '.sh')]"	
 			],
 			"commandToExecute": ""
 		},
