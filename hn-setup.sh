@@ -23,13 +23,13 @@ cat << EOF >> /etc/security/limits.conf
 EOF
 
 #Create directories needed for configuration
+SHARE_HOME=/mnt/resource/scratch
 mkdir -p /home/$USER/.ssh
 mkdir -p /home/$USER/bin
 mkdir -p /mnt/resource/scratch/applications
 mkdir -p /mnt/resource/scratch/INSTALLERS
 mkdir -p /mnt/resource/scratch/benchmark
 mkdir -p /mnt/lts
-
 
 ln -s /mnt/resource/scratch/ /home/$USER/scratch
 ln -s /mnt/lts /home/$USER/lts
@@ -119,4 +119,4 @@ sed -i 's/^Defaults[ ]*requiretty/# Defaults requiretty/g' /etc/sudoers
 #name=`head -1 /home/$USER/bin/hostips`
 #cat install-$SOLVER.sh | sshpass -p "$PASS" ssh $USER@$name "cat >> /home/$USER/install-$SOLVER.sh"
 #sshpass -p $PASS ssh -t -t -o ConnectTimeout=2 $USER@$name source install-$SOLVER.sh $USER $LICIP $DOWN > script_output
-bash install-$SOLVER.sh
+bash install-$SOLVER.sh $SHARE_HOME $LICIP $DOWN
