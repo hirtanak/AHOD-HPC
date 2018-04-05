@@ -120,4 +120,5 @@ sed -i 's/^Defaults[ ]*requiretty/# Defaults requiretty/g' /etc/sudoers
 #name=`head -1 /home/$USER/bin/hostips`
 #cat install-$SOLVER.sh | sshpass -p "$PASS" ssh $USER@$name "cat >> /home/$USER/install-$SOLVER.sh"
 #sshpass -p $PASS ssh -t -t -o ConnectTimeout=2 $USER@$name source install-$SOLVER.sh $USER $LICIP $DOWN > script_output
+cd /home/$USER/bin
 bash install-$SOLVER.sh $SHARE_HOME $LICIP $DOWN
