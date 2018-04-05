@@ -8,12 +8,12 @@ DOWN=$3
 SHARE_DATA=/mnt/resource/scratch
 echo $SHARE_HOME,$LICIP,$HOST,$DOWN,$SHARE_DATA
 
-wget -q https://hirostpublicshare.blob.core.windows.net/solvers/STAR-CCM%2B12.04.010_01_linux-x86_64.tar.gz -O $SHARE_DATA/INSTALLERS/STAR-CCM+12.04.010_01_linux-x86_64.tar.gz
+wget -q https://hirostpublicshare.blob.core.windows.net/solvers/STAR-CCM%2B12.04.010_01_linux-x86_64-r8.tar.gz -O $SHARE_DATA/INSTALLERS/STAR-CCM+12.04.010_01_linux-x86_64-r8.tar.gz
 #wget -q http://azbenchmarkstorage.blob.core.windows.net/cdadapcobenchmarkstorage/runAndRecord.java -O $SHARE_DATA/benchmark/runAndRecord.java
 #wget -q http://azbenchmarkstorage.blob.core.windows.net/cdadapcobenchmarkstorage/$DOWN -O $SHARE_DATA/benchmark/$DOWN
 
 #tar -xf $SHARE_DATA/benchmark/$DOWN -C $SHARE_DATA/benchmark
-tar -zxvf $SHARE_DATA/INSTALLERS/STAR-CCM+12.04.010_01_linux-x86_64.tar.gz -C $SHARE_DATA/INSTALLERS/
+tar -zxvf $SHARE_DATA/INSTALLERS/STAR-CCM+12.04.010_01_linux-x86_64-r8.tar.gz -C $SHARE_DATA/INSTALLERS/
 
 cd $SHARE_DATA/INSTALLERS/starccm+_12.04.010/
 
