@@ -6,9 +6,9 @@ LICIP=$2
 HOST=`hostname`
 DOWN=$3
 SHARE_DATA=/mnt/resource/scratch
-echo $SHARE_HOME,$LICIP,$HOST,$DOWN
+echo $SHARE_HOME,$LICIP,$HOST,$DOWN,$SHARE_DATA
 
-wget -q https://hirostpublicshare.blob.core.windows.net/solvers/STAR-CCM%2B12.04.010_01_linux-x86_64.tar.gz -O $SHARE_DATA/INSTALLERS/STAR-CCM+12.02.010_01_linux-x86_64.tar.gz
+wget -q https://hirostpublicshare.blob.core.windows.net/solvers/STAR-CCM%2B12.04.010_01_linux-x86_64.tar.gz -O $SHARE_DATA/INSTALLERS/STAR-CCM+12.04.010_01_linux-x86_64.tar.gz
 #wget -q http://azbenchmarkstorage.blob.core.windows.net/cdadapcobenchmarkstorage/runAndRecord.java -O $SHARE_DATA/benchmark/runAndRecord.java
 #wget -q http://azbenchmarkstorage.blob.core.windows.net/cdadapcobenchmarkstorage/$DOWN -O $SHARE_DATA/benchmark/$DOWN
 
