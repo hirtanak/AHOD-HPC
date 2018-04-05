@@ -12,8 +12,8 @@ wget -q https://hirostpublicshare.blob.core.windows.net/solvers/STAR-CCM%2B12.04
 #wget -q http://azbenchmarkstorage.blob.core.windows.net/cdadapcobenchmarkstorage/runAndRecord.java -O $SHARE_DATA/benchmark/runAndRecord.java
 #wget -q http://azbenchmarkstorage.blob.core.windows.net/cdadapcobenchmarkstorage/$DOWN -O $SHARE_DATA/benchmark/$DOWN
 
-tar -xf $SHARE_DATA/benchmark/$DOWN -C $SHARE_DATA/benchmark
-tar -xzf $SHARE_DATA/INSTALLERS/STAR-CCM+12.04.010_01_linux-x86_64.tar.gz -C $SHARE_DATA/INSTALLERS/
+#tar -xf $SHARE_DATA/benchmark/$DOWN -C $SHARE_DATA/benchmark
+tar -zxvf $SHARE_DATA/INSTALLERS/STAR-CCM+12.04.010_01_linux-x86_64.tar.gz -C $SHARE_DATA/INSTALLERS/
 
 cd $SHARE_DATA/INSTALLERS/starccm+_12.04.010/
 
