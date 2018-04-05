@@ -35,17 +35,13 @@ defaults 0 0" | tee -a /etc/fstab
     df | grep $IPPRE
     impi_version=`ls /opt/intel/impi`
     source /opt/intel/impi/${impi_version}/bin64/mpivars.sh
-    ln -s /opt/intel/impi/${impi_version}/intel64/bin/
-/opt/intel/impi/${impi_version}/bin
-    ln -s /opt/intel/impi/${impi_version}/lib64/
-/opt/intel/impi/${impi_version}/lib
+    ln -s /opt/intel/impi/${impi_version}/intel64/bin/ /opt/intel/impi/${impi_version}/bin
+    ln -s /opt/intel/impi/${impi_version}/lib64/ /opt/intel/impi/${impi_version}/lib
 
     echo export I_MPI_FABRICS=shm:dapl >> /home/$USER/.bashrc
     echo export I_MPI_DAPL_PROVIDER=ofa-v2-ib0 >> /home/$USER/.bashrc
-    echo export I_MPI_ROOT=/opt/intel/impi/${impi_version} >>
-/home/$USER/.bashrc
-    echo export PATH=/opt/intel/impi/${impi_version}/bin64:$PATH >>
-/home/$USER/.bashrc
+    echo export I_MPI_ROOT=/opt/intel/impi/${impi_version} >> /home/$USER/.bashrc
+    echo export PATH=/opt/intel/impi/${impi_version}/bin64:$PATH >> /home/$USER/.bashrc
     echo export I_MPI_DYNAMIC_CONNECTION=0 >> /home/$USER/.bashrc
 
 else
