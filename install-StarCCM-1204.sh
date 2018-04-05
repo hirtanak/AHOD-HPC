@@ -1,5 +1,4 @@
 #!/bin/bash
-
 set -x
 
 SHARE_HOME=$1
