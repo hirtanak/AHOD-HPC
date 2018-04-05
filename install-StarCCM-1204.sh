@@ -15,6 +15,7 @@ wget -q https://hirostpublicshare.blob.core.windows.net/solvers/STAR-CCM%2B12.04
 #tar -xf $SHARE_DATA/benchmark/$DOWN -C $SHARE_DATA/benchmark
 tar -zxvf $SHARE_DATA/INSTALLERS/STAR-CCM+12.04.010_01_linux-x86_64-r8.tar.gz -C $SHARE_DATA/INSTALLERS/
 
+mkdir -p $SHARE_DATA/INSTALLERS/starccm+_12.04.010/
 cd $SHARE_DATA/INSTALLERS/starccm+_12.04.010/
 
 echo export PODKey=$LICIP >> $SHARE_HOME/.bashrc
