@@ -370,16 +370,16 @@
 			"apiVersion": "[variables('storageApiVersion')]",
 			"location": "[variables('resourceLocation')]",
 			"tags": {
-				"displayName": "masterExtension"
+				"displayName": "ScriptExtension"
 			},
 			"properties": {
-				"publisher": "Microsoft.OSTCExtensions",
-				"type": "CustomScriptForLinux",
-				"typeHandlerVersion": "1.5",
-				"autoUpgradeMinorVersion": true,
-				"settings": {
-					"fileUris": "[variables('vmScripts').scriptsToDownload]",
-					"commandToExecute": "[concat('bash ', 'hn-setup.sh ',parameters('solver'),' ',parameters('adminUsername'),' ',parameters('adminPassword'),' ',parameters('downloadModel'),' ',parameters('license')) ]",
+				"publisher": "Microsoft.Azure.Extensions",
+				"type": "CustomScript",
+				"typeHandlerVersion": "2.0",
+        			"autoUpgradeMinorVersion": true,
+			"settings": {
+				"fileUris": "[variables('vmScripts').scriptsToDownload]",
+				"commandToExecute": "[concat('bash ', 'hn-setup.sh ',parameters('solver'),' ',parameters('adminUsername'),' ',parameters('adminPassword'),' ',parameters('downloadModel'),' ',parameters('license')) ]",
 					"timestamp": 4
 				}
 			},
