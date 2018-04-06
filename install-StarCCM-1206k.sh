@@ -32,7 +32,7 @@ echo export I_MPI_DYNAMIC_CONNECTION=0 >> $SHARE_HOME/.bashrc
 echo '$SHARE_DATA/applications/12.06.010/STAR-CCM+12.06.010/star/bin/starccm+ -np 28 -machinefile '$HOSTS' -power -podkey '$PODKey' -rsh ssh -mpi intel -cpubind bandwidth,v -mppflags " -ppn 14 -genv I_MPI_DAPL_PROVIDER=ofa-v2-ib0 -genv I_MPI_DYNAMIC_CONNECTION=0" -batch runAndRecord.java $SHARE_DATA/benchmark/*.sim' >> $SHARE_DATA/benchmark/runccm_example.sh
 
 cd $SHARE_DATA/INSTALLERS/starccm+_12.06.010/
-sh $SHARE_DATA/INSTALLERS/starccm+_12.06.010/STAR-CCM+12.06.010_01_linux-x86_64-2.5_gnu4.8.bin -i silent -DINSTALLDIR=$SHARE_DATA/applications -DNODOC=true -DINSTALLFLEX=false
+sh $SHARE_DATA/INSTALLERS/starccm+_12.06.010/STAR-CCM+12.06.010_01_linux-x86_64-2.5_gnu6.2-r8.sh -i silent -DINSTALLDIR=$SHARE_DATA/applications -DNODOC=true -DINSTALLFLEX=false
 
 #rm -rf $SHARE_DATA/INSTALLERS/STAR-CCM+12.02.010_01_linux-x86_64.tar.gz
 #rm $SHARE_DATA/*.tgz
