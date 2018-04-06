@@ -61,7 +61,7 @@
         },
         "nbDataDisks": {
             "type": "int",
-            "defaultValue": 12,
+            "defaultValue": 8,
             "maxValue": 16,
             "metadata": {
                 "description": "The number of disks to attach to the NFS server."
@@ -105,7 +105,8 @@
 				"CCM_LeMans_100M.tgz",
 				"CCM_LeMans_514M.tgz",
 				"CCM_VTM_68M.tgz",
-				"CCM_VTM_178M.tgz"			
+				"CCM_VTM_178M.tgz",
+				"WS03"
 			],
 			"type": "String",
 			"metadata": {
