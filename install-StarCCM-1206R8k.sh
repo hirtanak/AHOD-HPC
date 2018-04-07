@@ -5,8 +5,9 @@ SHARE_HOME=$1
 LICIP=$2
 HOST=`hostname`
 DOWN=$3
+USER=$4
 SHARE_DATA=/mnt/resource/scratch
-echo $USER,$SHARE_HOME,$LICIP,$HOST,$DOWN,$SHARE_DATA
+echo $USER,$SHARE_HOME,$LICIP,$HOST,$DOWN,$SHARE_DATA,$USER
 
 # create directory
 mkdir -p $SHARE_DATA/INSTALLERS/starccm+_12.06.010/
@@ -23,13 +24,13 @@ tar -zxvf $SHARE_DATA/INSTALLERS/STAR-CCM+12.06.010_01_linux-x86_64-r8.tar.gz -C
 
 echo 'export PODKey=$LICIP' >> $USER/.bashrc
 echo 'export CDLMD_LICENSE_FILE=1999@flex.cd-adapco.com' >> $USER/.bashrc
-export HOSTS=$SHARE_HOME/bin/hosts
+#export HOSTS=$SHARE_HOME/bin/hosts
 echo 'export I_MPI_FABRICS=shm:dapl' >> $USER/.bashrc
 echo 'export I_MPI_DAPL_PROVIDER=ofa-v2-ib0' >> $USER/.bashrc
 echo 'export I_MPI_ROOT=/opt/intel/compilers_and_libraries_2016.2.223/linux/mpi' >> $USER/.bashrc
 echo 'export PATH=$SHARE_DATA/applications/12.06.010-R8/STAR-CCM+12.06.010-R8/star/bin:/opt/intel/impi/5.1.3.223/bin64:$PATH' >> $USER/.bashrc
 echo 'export I_MPI_DYNAMIC_CONNECTION=0' >> $USER/.bashrc
-echo '${SHARE_DATA}/applications/12.06.010-R8/STAR-CCM+12.06.010-R8/star/bin/starccm+ -np 28 -machinefile ${HOSTS} -power -podkey ${PODKey} -rsh ssh -mpi intel -cpubind bandwidth,v -mppflags " -ppn 14 -genv I_MPI_DAPL_PROVIDER=ofa-v2-ib0 -genv I_MPI_DYNAMIC_CONNECTION=0" -batch runAndRecord.java $SHARE_DATA/benchmark/*.sim' >> $SHARE_DATA/benchmark/runccm_example.sh
+echo '${SHARE_DATA}/applications/12.06.010-R8/STAR-CCM+12.06.010-R8/star/bin/starccm+ -np 28 -machinefile ${HOSTS} -power -podkey ${PODKey} -rsh ssh -mpi intel -cpubind bandwidth,v -mppflags " -ppn 14 -genv I_MPI_DAPL_PROVIDER=ofa-v2-ib0 -genv I_MPI_DYNAMIC_CONNECTION=0" -batch runAndRecord.java $SHARE_DATA/benchmark/*.sim' >> ${SHARE_DATA}/benchmark/runccm_example.sh
 chmod +x $SHARE_DATA/benchmark/runccm_example.sh
 chown $USER:$USER $SHARE_DATA/benchmark/runccm_example.sh
 
