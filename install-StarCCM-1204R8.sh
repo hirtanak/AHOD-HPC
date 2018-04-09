@@ -38,7 +38,7 @@ chown $USER:$USER $SHARE_DATA/benchmark/*.sim
 chown $USER:$USER $SHARE_DATA/benchmark/*.tgz
 
 cd $SHARE_DATA/INSTALLERS/starccm+_12.04.010/
-sh $SHARE_DATA/INSTALLERS/starccm+_12.04.010/STAR-CCM+12.04.010_01_linux-x86_64-2.5_gnu4.8.bin -i silent -DINSTALLDIR=$SHARE_DATA/applications -DNODOC=true -DINSTALLFLEX=false
+sh $SHARE_DATA/INSTALLERS/starccm+_12.04.010/STAR-CCM+12.04.010_01_linux-x86_64-2.5_gnu4.8-r8.bin -i silent -DINSTALLDIR=$SHARE_DATA/applications -DNODOC=true -DINSTALLFLEX=false
 
 #rm -rf $SHARE_DATA/INSTALLERS/STAR-CCM+12.02.010_01_linux-x86_64.tar.gz
 #rm $SHARE_DATA/*.tgz
