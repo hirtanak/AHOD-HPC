@@ -9,6 +9,9 @@ USER=$4
 SHARE_DATA=/mnt/resource/scratch
 echo $SHARE_HOME,$LICIP,$HOST,$DOWN,$SHARE_DATA,$USER
 
+# install library
+yum install -y libXext.x86_64 libSM.x86_64 libXt
+
 # create directory
 mkdir -p $SHARE_DATA/INSTALLERS/starccm+_12.04.010/
 
