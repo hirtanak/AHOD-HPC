@@ -45,9 +45,9 @@ rpm --import /etc/pki/rpm-gpg/RPM-GPG-KEY-EPEL-7
 rpm --import /etc/pki/rpm-gpg/OpenLogic-GPG-KEY
 yum check-update
 yum install -y epel-release
-#yum install -y nfs-utils sshpass nmap htop pdsh screen git psmisc
-yum install -y nfs-utils sshpass nmap 
-yum install -y gcc libffi-devel python-devel openssl-devel --disableexcludes=all
+yum install -y nfs-utils sshpass nmap htop pdsh screen git psmisc
+#yum install -y nfs-utils sshpass nmap 
+yum install -y gcc* libffi-devel python-devel openssl-devel --disableexcludes=all
 #yum groupinstall -y "X Window System"
 
 #install az cli
