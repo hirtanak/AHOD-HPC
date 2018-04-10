@@ -91,6 +91,7 @@
 			"defaultValue": "None",
 			"allowedValues": [
 				"None",
+				"A.sim",
 				"WS03_init.sim"
 			],
 			"type": "String",
