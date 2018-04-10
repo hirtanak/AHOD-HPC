@@ -44,5 +44,6 @@ chown $USER:$USER $SHARE_DATA/benchmark/*.tgz
 cd $SHARE_DATA/INSTALLERS/starccm+_12.06.010/
 sh $SHARE_DATA/INSTALLERS/starccm+_12.06.010/STAR-CCM+12.06.010_01_linux-x86_64-2.5_gnu6.2-r8.sh -i silent -DINSTALLDIR=$SHARE_DATA/applications -DNODOC=true -DINSTALLFLEX=false
 
+rm -rf $SHARE_DATA/benchmark/None
 #rm -rf $SHARE_DATA/INSTALLERS/STAR-CCM+12.02.010_01_linux-x86_64.tar.gz
 #rm $SHARE_DATA/*.tgz
