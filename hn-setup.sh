@@ -51,7 +51,9 @@ yum install -y gcc* libffi-devel python-devel openssl-devel --disableexcludes=al
 #yum groupinstall -y "X Window System"
 
 #install az cli
-#curl -L https://aka.ms/InstallAzureCli | bash
+rpm --import https://packages.microsoft.com/keys/microsoft.asc
+sh -c 'echo -e "[azure-cli]\nname=Azure CLI\nbaseurl=https://packages.microsoft.com/yumrepos/azure-cli\nenabled=1\ngpgcheck=1\ngpgkey=https://packages.microsoft.com/keys/microsoft.asc" > /etc/yum.repos.d/azure-cli.repo'
+yum install azure-cli
 
 #Use ganglia install script to install ganglia, this is downloaded via the ARM template
 #chmod +x install_ganglia.sh
