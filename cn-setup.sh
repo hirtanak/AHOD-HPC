@@ -45,8 +45,8 @@ defaults 0 0" | tee -a /etc/fstab
     echo export I_MPI_DYNAMIC_CONNECTION=0 >> /home/$USER/.bashrc
     
     chmod +x /etc/rc.d/rc.local
-    echo "mkdir -p /mnt/resource/scratch" >> /etc/rc.local
-    echo "mount -a" >> /etc/rc.local
+    echo "mkdir -p /mnt/resource/scratch" >> /etc/rc.d/rc.local
+    echo "mount -a" >> /etc/rc.d/rc.local
 else
     echo already mounted
     df | grep $IPPRE
