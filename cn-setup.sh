@@ -45,9 +45,11 @@ defaults 0 0" | tee -a /etc/fstab
     echo export I_MPI_DYNAMIC_CONNECTION=0 >> /home/$USER/.bashrc
     
     chmod +x /etc/rc.d/rc.local
+    sed -i 's/touch/#touch/g' /etc/rc.d/rc.local
     echo "sudo mkdir -p /mnt/resource/scratch" >> /etc/rc.d/rc.local
     echo "sudo umount -a" >> /etc/rc.d/rc.local
     echo "sudo mount -a" >> /etc/rc.d/rc.local
+    
 else
     echo already mounted
     df | grep $IPPRE
