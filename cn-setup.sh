@@ -49,6 +49,7 @@ defaults 0 0" | tee -a /etc/fstab
     echo "sudo mkdir -p /mnt/resource/scratch" >> /etc/rc.d/rc.local
     echo "sudo umount -a" >> /etc/rc.d/rc.local
     echo "sudo mount -a" >> /etc/rc.d/rc.local
+    echo "exit 0" >> /etc/rc.d/rc.local
     
 else
     echo already mounted
