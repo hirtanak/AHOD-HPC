@@ -44,6 +44,7 @@ defaults 0 0" | tee -a /etc/fstab
     echo export PATH=/opt/intel/impi/${impi_version}/bin64:$PATH >> /home/$USER/.bashrc
     echo export I_MPI_DYNAMIC_CONNECTION=0 >> /home/$USER/.bashrc
     
+    chmod +x /etc/rc.d/rc.local
     echo "mkdir -p /mnt/resource/scratch" >> /etc/rc.local
     echo "mount -a" >> /etc/rc.local
 else
