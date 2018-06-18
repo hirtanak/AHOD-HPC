@@ -45,12 +45,12 @@ defaults 0 0" | tee -a /etc/fstab
     echo export I_MPI_DYNAMIC_CONNECTION=0 >> /home/$USER/.bashrc
     
     chmod +x /etc/rc.d/rc.local
-#    sed -i 's/touch/#touch/g' /etc/rc.d/rc.local
+    #grep -v "touch" /etc/rc.d/rc.local | sed 's/touch/#touch/g' 
     echo "sudo mkdir -p /mnt/resource/scratch" >> /etc/rc.d/rc.local
     echo sleep 10 >> /etc/rc.d/rc.local
     echo "sudo umount -a" >> /etc/rc.d/rc.local
-    echo "sudo mount -a" >> /etc/rc.d/rc.local
-    echo "exit 0" >> /etc/rc.d/rc.local
+    #echo "sudo mount -a" >> /etc/rc.d/rc.local
+    #echo "exit 0" >> /etc/rc.d/rc.local
     
 else
     echo already mounted
