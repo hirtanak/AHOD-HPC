@@ -43,7 +43,9 @@ defaults 0 0" | tee -a /etc/fstab
     echo export I_MPI_ROOT=/opt/intel/impi/${impi_version} >> /home/$USER/.bashrc
     echo export PATH=/opt/intel/impi/${impi_version}/bin64:$PATH >> /home/$USER/.bashrc
     echo export I_MPI_DYNAMIC_CONNECTION=0 >> /home/$USER/.bashrc
-
+    
+    echo "mkdir -p /mnt/resource/scratch" >> /etc/rc.local
+    echo "mount -a" >> /etc/rc.local
 else
     echo already mounted
     df | grep $IPPRE
