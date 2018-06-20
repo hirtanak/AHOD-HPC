@@ -35,7 +35,7 @@ if [ $FLAG = NOTMOUNTED ] ; then
     source /opt/intel/impi/${impi_version}/bin64/mpivars.sh
     ln -s /opt/intel/impi/${impi_version}/intel64/bin/ /opt/intel/impi/${impi_version}/bin
     ln -s /opt/intel/impi/${impi_version}/lib64/ /opt/intel/impi/${impi_version}/lib
-    echo "@reboot mkdir -p /mnt/resource/scratch && chown ${USER}:${USER} /mnt/resource/scratch && $IPPRE:/mnt/resource/scratch /mnt/resource/scratch" | tee -a /var/spool/cron/root
+    echo "@reboot mkdir -p /mnt/resource/scratch && chown ${USER}:${USER} /mnt/resource/scratch && mount -t nfs $IPPRE:/mnt/resource/scratch /mnt/resource/scratch" | tee -a /var/spool/cron/root
     #echo "@reboot chown ${USER}:${USER} /mnt/resource/scratch" | tee -a /var/spool/cron/root
     #echo "@reboot $IPPRE:/mnt/resource/scratch /mnt/resource/scratch" | tee -a /var/spool/cron/root
 
