@@ -35,7 +35,7 @@ if [ $FLAG = NOTMOUNTED ] ; then
     source /opt/intel/impi/${impi_version}/bin64/mpivars.sh
     ln -s /opt/intel/impi/${impi_version}/intel64/bin/ /opt/intel/impi/${impi_version}/bin
     ln -s /opt/intel/impi/${impi_version}/lib64/ /opt/intel/impi/${impi_version}/lib
-    echo "@reboot mkdir -p /mnt/resource/scaratch" | tee -a /var/spool/cron/root
+    echo "@reboot mkdir -p /mnt/resource/scratch" | tee -a /var/spool/cron/root
     echo "@reboot $IPPRE:/mnt/resource/scratch /mnt/resource/scratch" | tee -a /var/spool/cron/root
 
     echo export I_MPI_FABRICS=shm:dapl >> /home/$USER/.bashrc
