@@ -27,16 +27,16 @@ if [ $FLAG = NOTMOUNTED ] ; then
     systemctl start nfs-lock
     systemctl start nfs-idmap
     localip=`hostname -i | cut --delimiter='.' -f -3`
-    ## echo "$IPPRE:/mnt/nfsshare    /mnt/nfsshare   nfs defaults 0 0" |
-tee -a /etc/fstab
-    echo "$IPPRE:/mnt/resource/scratch    /mnt/resource/scratch   nfs
-defaults 0 0" | tee -a /etc/fstab
+    ## echo "$IPPRE:/mnt/nfsshare    /mnt/nfsshare   nfs defaults 0 0" | tee -a /etc/fstab
+    echo "$IPPRE:/mnt/resource/scratch    /mnt/resource/scratch   nfs   defaults 0 0" | tee -a /etc/fstab
     mount -a
     df | grep $IPPRE
     impi_version=`ls /opt/intel/impi`
     source /opt/intel/impi/${impi_version}/bin64/mpivars.sh
     ln -s /opt/intel/impi/${impi_version}/intel64/bin/ /opt/intel/impi/${impi_version}/bin
     ln -s /opt/intel/impi/${impi_version}/lib64/ /opt/intel/impi/${impi_version}/lib
+    echo "@reboot mkdir -p /mnt/resource/scaratch" | tee -a /var/spool/cron/root
+    echo "@reboot $IPPRE:/mnt/resource/scratch /mnt/resource/scratch" | tee -a /var/spool/cron/root
 
     echo export I_MPI_FABRICS=shm:dapl >> /home/$USER/.bashrc
     echo export I_MPI_DAPL_PROVIDER=ofa-v2-ib0 >> /home/$USER/.bashrc
