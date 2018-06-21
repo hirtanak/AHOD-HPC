@@ -51,7 +51,7 @@ if [ $FLAG = NOTMOUNTED ] ; then
     echo "mount -t nfs $IPPRE:/mnt/resource/scratch /mnt/resource/scratch" | tee -a ~/bootcron.sh
     echo "fi" | tee -a ~/bootcron.sh
     chmod +x ~/bootcron.sh
-    ln -s /root/bootcron.sh /home/${USER}/bin/bootcron.sh
+    ln -s /root/bootcron.sh /home/${USER}/bootcron.sh
     
     echo export I_MPI_FABRICS=shm:dapl >> /home/$USER/.bashrc
     echo export I_MPI_DAPL_PROVIDER=ofa-v2-ib0 >> /home/$USER/.bashrc
