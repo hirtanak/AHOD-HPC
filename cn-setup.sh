@@ -38,8 +38,15 @@ if [ $FLAG = NOTMOUNTED ] ; then
     #echo "@reboot mkdir -p /mnt/resource/scratch && chown ${USER}:${USER} /mnt/resource/scratch && mount -t nfs $IPPRE:/mnt/resource/scratch /mnt/resource/scratch" | tee -a /var/spool/cron/root
     #echo "@reboot chown ${USER}:${USER} /mnt/resource/scratch" | tee -a /var/spool/cron/root
     #echo "@reboot $IPPRE:/mnt/resource/scratch /mnt/resource/scratch" | tee -a /var/spool/cron/root
+    
+    # fix mount problem
     echo "@reboot ~/bootcron.sh" | tee -a /var/spool/cron/root
+    echo "45 * * * * ~/bootcron.sh" | tee -a /var/spool/cron/root
+    echo "if [ -d /mnt/resource/scratch ]; then" | tee -a ~/bootcron.sh
+    echo "echo "[bootcron] Already mounted"" | tee -a ~/bootcron.sh
+    echo "else" | tee -a ~/bootcron.sh
     echo "mkdir -p /mnt/resource/scratch" | tee -a ~/bootcron.sh
+    
     echo "chown ${USER}:${USER} /mnt/resource/scratch" | tee -a ~/bootcron.sh
     echo "mount -t nfs $IPPRE:/mnt/resource/scratch /mnt/resource/scratch" | tee -a ~/bootcron.sh
     chmod +x ~/bootcron.sh
@@ -49,15 +56,7 @@ if [ $FLAG = NOTMOUNTED ] ; then
     echo export I_MPI_ROOT=/opt/intel/impi/${impi_version} >> /home/$USER/.bashrc
     echo export PATH=/opt/intel/impi/${impi_version}/bin64:$PATH >> /home/$USER/.bashrc
     echo export I_MPI_DYNAMIC_CONNECTION=0 >> /home/$USER/.bashrc
-    
-    #chmod +x /etc/rc.d/rc.local
-    #grep -v "touch" /etc/rc.d/rc.local | sed 's/touch/#touch/g' 
-    #echo "sudo mkdir -p /mnt/resource/scratch" >> /etc/rc.d/rc.local
-    #echo sleep 10 >> /etc/rc.d/rc.local
-    #echo "sudo umount -a" >> /etc/rc.d/rc.local
-    #echo "sudo mount -a" >> /etc/rc.d/rc.local
-    #echo "exit 0" >> /etc/rc.d/rc.local
-    
+        
 else
     echo already mounted
     df | grep $IPPRE
