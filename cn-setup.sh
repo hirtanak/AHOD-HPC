@@ -49,6 +49,7 @@ if [ $FLAG = NOTMOUNTED ] ; then
     echo "mkdir -p /mnt/resource/scratch" | tee -a ~/bootcron.sh
     echo "chown ${USER}:${USER} /mnt/resource/scratch" | tee -a ~/bootcron.sh
     echo "mount -t nfs $IPPRE:/mnt/resource/scratch /mnt/resource/scratch" | tee -a ~/bootcron.sh
+    echo "fi" | tee -a ~/bootcron.sh
     chmod +x ~/bootcron.sh
     ln -s /root/bootcron.sh /home/${USER}/bin/bootcron.sh
     
