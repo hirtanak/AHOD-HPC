@@ -44,7 +44,7 @@ if [ $FLAG = NOTMOUNTED ] ; then
     echo "@reboot ~/bootcron.sh" | tee -a /var/spool/cron/root
     echo "45 * * * * ~/bootcron.sh" | tee -a /var/spool/cron/root
     echo "if [ -d /mnt/resource/scratch ]; then" | tee -a ~/bootcron.sh
-    echo "echo "[bootcron] Already mounted"" | tee -a ~/bootcron.sh
+    echo "echo '[bootcron] Already mounted'" | tee -a ~/bootcron.sh
     echo "else" | tee -a ~/bootcron.sh
     echo "mkdir -p /mnt/resource/scratch" | tee -a ~/bootcron.sh
     echo "chown ${USER}:${USER} /mnt/resource/scratch" | tee -a ~/bootcron.sh
