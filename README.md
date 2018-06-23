@@ -4,51 +4,6 @@ Azure Resource Manager Templates for Ad-Hoc On-Demand HPC clusters
 <table>
 <tr>
 <td align="center">
-Deploy cluster with a new VNET
-<br><br>
-<a href="https://portal.azure.com/#create/Microsoft.Template/uri/https%3A%2F%2Fraw.githubusercontent.com%2Ftanewill%2FAHOD-HPC%2Fmaster%2Fazuredeploy.json" target="_blank">
-    <img src="http://azuredeploy.net/deploybutton.png" />
-</a>
-</td>
-<td align="center">
-Deploy cluster to an existing VNET
-<br><br>
-<a href="https://portal.azure.com/#create/Microsoft.Template/uri/https%3A%2F%2Fraw.githubusercontent.com%2Ftanewill%2FAHOD-HPC%2Fmaster%2Fazuredeploy_existingvnet.json" target="_blank">
-    <img src="http://azuredeploy.net/deploybutton.png" />
-</a>
-</td></tr>
-<tr>
-<td align="center">
-Deploy using managed disks (experimental)
-<br><br>
-<a href="https://portal.azure.com/#create/Microsoft.Template/uri/https%3A%2F%2Fraw.githubusercontent.com%2Ftanewill%2FAHOD-HPC%2Fmaster%2Fazuredeploy_disks.json" target="_blank">
-    <img src="http://azuredeploy.net/deploybutton.png" />
-</a>
-</td>
-<td align="center">
-Visualize architecture
-<br><br>
-<a href="http://armviz.io/#/?load=https%3A%2F%2Fraw.githubusercontent.com%2Ftanewill%2FAHOD%2Fmaster%2Fazuredeploy.json" target="_blank">
-<img src="http://armviz.io/visualizebutton.png"/>
-</a>
-</td>
-<tr>
-<td align="center">
-Deploy using JSON copy
-<br><br>
-<a href="https://portal.azure.com/#create/Microsoft.Template/uri/https%3A%2F%2Fraw.githubusercontent.com%2Ftanewill%2FAHOD-HPC%2Fmaster%2Fazuredeploy_ARMcopy.json" target="_blank">
-    <img src="http://azuredeploy.net/deploybutton.png" />
-</a>
-</td>
-<td align="center">
-Deploy using JSON copy and common home
-<br><br>
-<a href="https://portal.azure.com/#create/Microsoft.Template/uri/https%3A%2F%2Fraw.githubusercontent.com%2Ftanewill%2FAHOD-HPC%2Fmaster%2Fazuredeploy_ARMcopy_common.json" target="_blank">
-    <img src="http://azuredeploy.net/deploybutton.png" />
-</a>
-</td></tr>
-<tr>
-<td align="center">
 Deploy cluster to an New VNET with Managed Disk
 <br><br>
 <a href="https://portal.azure.com/#create/Microsoft.Template/uri/https%3A%2F%2Fraw.githubusercontent.com%2Fhirtanak%2FAHOD-HPC%2Fmaster%2Fazuredeploy_manageddisk.json" target="_blank">
@@ -117,10 +72,9 @@ A number of packages are installed during deployment in order to support the NFS
 
 <b>Licensing</b>
 
-Currently the default settings point to an internal Microsoft ANSYS license that can only be used for benchmarking, performance testing, and other non-sales related activities. If you are using this as part of a sales process you will need to simply place the IP address of the ANSYS license server in as a parameter at deploy time.
-
-We have updated this to use a VPN, please contact tanewill@microsoft.com for information regarding how to use the ANSYS license.
+The licensing is based on your license scheme and contract.
 
 <b>Known Issues</b>
 
-The Jumpbox takes the name given in the vmssName parameter and appends a 'jb' for its hostname. It is a known bug that Fluent will not properly communicate with the license server if the hostname is longer than 12 characters. The vmssName parameter is limited to 10 characters for that reason. H-Series VMs are only available in the South Central region, A8 and A9 VMs are only available in East US, North Central US, South Central US, West US, North Europe, West Europe, and Japan East.
+1. The Jumpbox takes the name given in the vmssName parameter and appends a 'jb' for its hostname. It is a known bug that Fluent will not properly communicate with the license server if the hostname is longer than 12 characters. The vmssName parameter is limited to 10 characters for that reason. 
+2. H-Series VMs are only available in the South Central region, A8 and A9 VMs are only available in East US, North Central US, South Central US, West US, North Europe, West Europe, and Japan East.
