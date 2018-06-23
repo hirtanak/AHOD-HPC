@@ -126,3 +126,8 @@ sed -i 's/^Defaults[ ]*requiretty/# Defaults requiretty/g' /etc/sudoers
 #sshpass -p $PASS ssh -t -t -o ConnectTimeout=2 $USER@$name source install-$SOLVER.sh $USER $LICIP $DOWN > script_output
 cd /home/$USER/bin
 bash install-$SOLVER.sh $SHARE_HOME $LICIP $DOWN ${USER}
+
+# downlaod scripts
+cd cd /home/$USER/bin
+wget https://raw.githubusercontent.com/hirtanak/AHOD-HPC/master/full-pingpong.sh
+chmod +x ./full-pingpong.sh
