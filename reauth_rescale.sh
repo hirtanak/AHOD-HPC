@@ -14,7 +14,7 @@ myhost=`hostname -i`
 sed -i '/\<'$myhost'\>/d' /home/$USER/bin/nodeips
 sed -i '/\<10.0.0.1\>/d' /home/$USER/bin/nodeips
 /home/$USER/bin/hosts
-for NAME in `cat /home/$USER/bin/nodeips.txt`; do sshpass -p $PASS ssh -o ConnectTimeout=2 $USER@$NAME 'hostname' >> /home/$USER/bin/hosts;done
+for NAME in `cat /home/$USER/bin/nodeips`; do sshpass -p $PASS ssh -o ConnectTimeout=2 $USER@$NAME 'hostname' >> /home/$USER/bin/hosts;done
 
 echo setting up connection to each node
 
