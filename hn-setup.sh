@@ -130,4 +130,5 @@ bash install-$SOLVER.sh $SHARE_HOME $LICIP $DOWN ${USER}
 # downlaod scripts
 cd cd /home/$USER/bin
 wget https://raw.githubusercontent.com/hirtanak/AHOD-HPC/master/full-pingpong.sh
+chown hirtanak:hirtanak ./full-pingpong.sh
 chmod +x ./full-pingpong.sh
