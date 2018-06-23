@@ -11,7 +11,7 @@ for NODE in `cat ${HOSTFILE}`; \
         do echo '##################################################' && \
             echo NODES: $NODE, $NODE2 && \
             echo '##################################################' && \
-            ${MPIRUNFILE}mpirun\
+            ${IMPIDIR}mpirun\
             -hosts $NODE,$NODE2 -ppn 1 -n 2 \
             -env I_MPI_FABRICS=dapl \
             -env I_MPI_DAPL_PROVIDER=ofa-v2-ib0 \
