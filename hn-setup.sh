@@ -105,7 +105,14 @@ for name in `cat /home/$USER/bin/hostips`; do
         sshpass -p $PASS ssh -t -t -o ConnectTimeout=2 $USER@$name 'echo "'$PASS'" | sudo -S sh /home/'$USER'/cn-setup.sh '$IP $USER $myhost &
 done
 
-
+# downlaod scripts
+cd /home/$USER/bin
+wget https://raw.githubusercontent.com/hirtanak/AHOD-HPC/master/full-pingpong.sh
+chmod +x ./full-pingpong.sh
+wget https://raw.githubusercontent.com/hirtanak/AHOD-HPC/master/pingsweep.sh
+chmod +x ./pingsweep.sh
+wget https://raw.githubusercontent.com/hirtanak/AHOD-HPC/master/reauth_rescale.sh
+chmod +x ./reauth_rescale.sh
 
 cp /home/$USER/bin/hosts /mnt/resource/scratch/hosts
 chown -R $USER:$USER /home/$USER/.ssh/
@@ -126,9 +133,3 @@ sed -i 's/^Defaults[ ]*requiretty/# Defaults requiretty/g' /etc/sudoers
 #sshpass -p $PASS ssh -t -t -o ConnectTimeout=2 $USER@$name source install-$SOLVER.sh $USER $LICIP $DOWN > script_output
 cd /home/$USER/bin
 bash install-$SOLVER.sh $SHARE_HOME $LICIP $DOWN ${USER}
-
-# downlaod scripts
-cd cd /home/$USER/bin
-wget https://raw.githubusercontent.com/hirtanak/AHOD-HPC/master/full-pingpong.sh
-chown hirtanak:hirtanak ./full-pingpong.sh
-chmod +x ./full-pingpong.sh
