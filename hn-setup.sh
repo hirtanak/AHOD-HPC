@@ -113,6 +113,8 @@ wget https://raw.githubusercontent.com/hirtanak/AHOD-HPC/master/pingsweep.sh
 chmod +x ./pingsweep.sh
 wget https://raw.githubusercontent.com/hirtanak/AHOD-HPC/master/reauth_rescale.sh
 chmod +x ./reauth_rescale.sh
+wget https://raw.githubusercontent.com/hirtanak/AHOD-HPC/master/createraid.sh
+chmod +x ./createraid.sh
 
 cp /home/$USER/bin/hosts /mnt/resource/scratch/hosts
 chown -R $USER:$USER /home/$USER/.ssh/
