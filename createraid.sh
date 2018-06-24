@@ -14,7 +14,7 @@ sudo parted -s -a optimal /dev/sd${DISKDRIVE} -- mkpart primary ext4 1 -1
 sudo parted -s -a optimal /dev/sd${DISKDRIVE} -- set 1 raid on
 done
 
-yes | sudo mdadm --create /dev/md0 --level=raid1 --raid-devices=${DISKS} /dev/sd[c-${DISKDRIVE}]1
+yes | sudo mdadm --create /dev/md0 --level=0 --raid-devices=${DISKS} /dev/sd[c-${DISKDRIVE}]1
 
 ## You can check this command to create file system 
 ## $ sudo cat /proc/mdstat 
