@@ -119,8 +119,8 @@ chmod +x ./createraid.sh
 cp /home/$USER/bin/hosts /mnt/resource/scratch/hosts
 chown -R $USER:$USER /home/$USER/.ssh/
 chown -R $USER:$USER /home/$USER/bin/
-chown -R $USER:$USER /mnt/resource/scratch/
 chown -R $USER:$USER /mnt/lts
+chown -R $USER:$USER /mnt/resource/scratch/
 chmod -R 744 /mnt/resource/scratch/
 
 # Don't require password for HPC user sudo
@@ -135,3 +135,6 @@ sed -i 's/^Defaults[ ]*requiretty/# Defaults requiretty/g' /etc/sudoers
 #sshpass -p $PASS ssh -t -t -o ConnectTimeout=2 $USER@$name source install-$SOLVER.sh $USER $LICIP $DOWN > script_output
 cd /home/$USER/bin
 bash install-$SOLVER.sh $SHARE_HOME $LICIP $DOWN ${USER}
+
+chown -R $USER:$USER /mnt/resource/scratch/
+chmod -R 744 /mnt/resource/scratch/
