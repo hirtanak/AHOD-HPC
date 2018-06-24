@@ -10,18 +10,18 @@ echo "" > /home/${USER}/.ssh/known_hosts
 IP=`ifconfig eth0 | grep -Eo 'inet (addr:)?([0-9]*\.){3}[0-9]*' | grep -Eo '([0-9]*\.){3}[0-9]*' | grep -v '127.0.0.1'`
 echo IP address is $IP
 localip=`echo $IP | cut --delimiter='.' -f -3`
-nmap -sn $localip.* | grep $localip. | awk '{print $5}' > /home/$USER/bin/hostsips
+nmap -sn $localip.* | grep $localip. | awk '{print $5}' > /home/$USER/bin/hostips
 myhost=`hostname -i`
-sed -i '/\<'$myhost'\>/d' /home/$USER/bin/hostsips
-sed -i '/\<10.0.0.1\>/d' /home/$USER/bin/hostsips
+sed -i '/\<'$myhost'\>/d' /home/$USER/bin/hostips
+sed -i '/\<10.0.0.1\>/d' /home/$USER/bin/hostips
 /home/$USER/bin/hosts
-for NAME in `cat /home/$USER/bin/hostsips`; do sshpass -p $PASS ssh -o ConnectTimeout=2 $USER@$NAME 'hostname' >> /home/$USER/bin/hosts;done
+for NAME in `cat /home/$USER/bin/hostips`; do sshpass -p $PASS ssh -o ConnectTimeout=2 $USER@$NAME 'hostname' >> /home/$USER/bin/hosts;done
 
 echo setting up connection to each node
 
 for NAME in `cat /home/$USER/bin/hostsips`; do 
     sshpass -p $PASS scp -o "StrictHostKeyChecking no" -o ConnectTimeout=2 /home/$USER/hosts $USER@$NAME:/home/$USER/
-    sshpass -p $PASS scp -o "StrictHostKeyChecking no" -o ConnectTimeout=2 /home/$USER/hostsips $USER@$NAME:/home/$USER/
+    sshpass -p $PASS scp -o "StrictHostKeyChecking no" -o ConnectTimeout=2 /home/$USER/hostips $USER@$NAME:/home/$USER/
     sshpass -p $PASS ssh -o ConnectTimeout=2 $USER@$NAME 'mkdir /home/'$USER'/.ssh && chmod 700 .ssh'
     sshpass -p $PASS scp -o "StrictHostKeyChecking no" -o ConnectTimeout=2 /home/$USER/.ssh/id_rsa.pub $USER@$NAME:/home/$USER/.ssh/authorized_keys
     sshpass -p $PASS scp -o "StrictHostKeyChecking no" -o ConnectTimeout=2 /home/$USER/.ssh/id_rsa $USER@$NAME:/home/$USER/.ssh/id_rsa
