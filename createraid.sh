@@ -15,11 +15,7 @@ sudo parted -s -a optimal /dev/sd${DISKDRIVE} -- set 1 raid on
 done
 
 yes | sudo mdadm --create /dev/md0 --level=0 --raid-devices=${DISKS} /dev/sd[c-${DISKDRIVE}]1
-
-## You can check this command to create file system 
-## $ sudo cat /proc/mdstat 
-## Personalities : [raid1] 
-## md0 : active raid1 sdn1[11] sdm1[10] sdl1[9] sdk1[8] sdj1[7] sdi1[6] sdh1[5] sdg1[4] sdf1[3] sde1[2] sdd1[1] sdc1[0]
-##      536737792 blocks super 1.2 [12/12] [UUUUUUUUUUUU]
-##      [===>.................]  resync = 15.6% (84170368/536737792) finish=182.8min speed=41255K/sec
-##      bitmap: 4/4 pages [16KB], 65536KB chunk
+sudo mkfs -t ext4 /dev/mnd0
+sudo mkdir -p /mnt/resource/md0
+sudo mount /dev/md0 /mnt/resource/md0
+echo "sudo chown user:user /mnt/resource/md0" 
