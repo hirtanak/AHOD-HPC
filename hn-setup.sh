@@ -48,7 +48,7 @@ yum install -y epel-release
 yum install -y nfs-utils sshpass nmap htop pdsh screen git psmisc
 yum install -y gcc* libffi-devel python-devel openssl-devel --disableexcludes=all
 #yum groupinstall -y "X Window System"
-yum install parted fio
+yum install -y parted fio
 
 #install az cli
 rpm --import https://packages.microsoft.com/keys/microsoft.asc
