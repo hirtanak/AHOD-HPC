@@ -8,6 +8,7 @@ read -s PASS
 
 echo "" > /home/${USER}/.ssh/known_hosts
 echo "" > /home/$USER/bin/hosts
+echo "" > /home/$USER/bin/hostips
 
 IP=`ifconfig eth0 | grep -Eo 'inet (addr:)?([0-9]*\.){3}[0-9]*' | grep -Eo '([0-9]*\.){3}[0-9]*' | grep -v '127.0.0.1'`
 echo IP address is $IP
