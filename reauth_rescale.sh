@@ -18,7 +18,7 @@ for NAME in `cat /home/$USER/bin/hostsips`; do sshpass -p $PASS ssh -o ConnectTi
 
 echo setting up connection to each node
 
-for NAME in `cat /home/$USER/bin/hostips`; do 
+for NAME in `cat /home/$USER/bin/hostsips`; do 
     sshpass -p $PASS scp -o "StrictHostKeyChecking no" -o ConnectTimeout=2 /home/$USER/hosts $USER@$NAME:/home/$USER/
     sshpass -p $PASS scp -o "StrictHostKeyChecking no" -o ConnectTimeout=2 /home/$USER/hostsips $USER@$NAME:/home/$USER/
     sshpass -p $PASS ssh -o ConnectTimeout=2 $USER@$NAME 'mkdir /home/'$USER'/.ssh && chmod 700 .ssh'
