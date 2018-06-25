@@ -217,14 +217,14 @@
 		"osType": {
 			"publisher": "OpenLogic",
 			"offer": "CentOS-HPC",
-			"sku": "7.3",
+			"sku": "7.4",
 			"version": "latest"
 		},
 		"imageReference": "[variables('osType')]",
 		"JBoxType": {
 			"publisher": "OpenLogic",
 			"offer": "CentOS-HPC",
-			"sku": "7.3",
+			"sku": "7.4",
 			"version": "latest"
 		},
 		"JBimageReference": "[variables('JBoxType')]",
