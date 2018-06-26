@@ -32,13 +32,6 @@ Deploy cluster to an New VNET with Managed Disk 20180405
     <img src="http://azuredeploy.net/deploybutton.png" />
 </a>
 </td></tr>
-<td align="center">
-Deploy cluster to an New VNET with Managed Disk 20180624
-<br><br>
-<a href="https://portal.azure.com/#create/Microsoft.Template/uri/https%3A%2F%2Fraw.githubusercontent.com%2Fhirtanak%2FAHOD-HPC%2Fmaster%2Fazuredeploy_manageddisk5.json" target="_blank">
-    <img src="http://azuredeploy.net/deploybutton.png" />
-</a>
-</td></tr>
 </table>
 
 <br></br>
