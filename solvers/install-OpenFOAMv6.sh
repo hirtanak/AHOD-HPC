@@ -5,24 +5,17 @@ HOST=`hostname`
 DOWN=$3
 echo $USER,$LICIP,$HOST,$DOWN
 
-#wget -q http://azbenchmarkstorage.blob.core.windows.net/foambenchmarkstorage/20170524_PE_OpenFOAM.tgz -O /mnt/resource/scratch/INSTALLERS/OF_IMPI.tgz
-wget -O /mnt/resource/scratch/INSTALLERS/ -q http://dl.openfoam.org/source/6
-wget -O /mnt/resource/scratch/INSTALLERS/ -q http://dl.openfoam.org/third-party/6
-
-tar -xzf /mnt/resource/scratch/INSTALLERS/OpenFOAM-6-version-6.tar.gz -C /mnt/resource/scratch/applications/
-tar -xzf /mnt/resource/scratch/INSTALLERS/ThirdParty-6-version-6.tar.gz -C /mnt/resource/scratch/applications/
-rm /mnt/resource/scratch/INSTALLERS/*.tgz
+cd /mnt/resource/scratch/applications
+wget -O - http://dl.openfoam.org/source/6 | tar xvz
+wget -O - http://dl.openfoam.org/third-party/6 | tar xvz
 
 echo export HOSTS=/home/$USER/bin/nodenames.txt >> /home/$USER/.bashrc
-echo export INTELMPI_ROOT=/opt/intel/impi/5.1.3.181 >> /home/$USER/.bashrc
 echo export I_MPI_FABRICS=shm:dapl >> /home/$USER/.bashrc
 echo export I_MPI_DAPL_PROVIDER=ofa-v2-ib0 >> /home/$USER/.bashrc
 echo export I_MPI_ROOT=/opt/intel/compilers_and_libraries_2016.2.181/linux/mpi >> /home/$USER/.bashrc
 echo export I_MPI_DYNAMIC_CONNECTION=0 >> /home/$USER/.bashrc
-echo export I_MPI_PIN_PROCESSOR=8 >> /home/$USER/.bashrc
-echo export MPI_ROOT='$I_MPI_ROOT' >>  /home/$USER/.bashrc
 echo export I_MPI_DAPL_TRANSLATION_CACHE=0 >>  /home/$USER/.bashrc
-echo source /mnt/resource/scratch/applications/OpenFOAM/OpenFOAM-4.x/etc/bashrc >>  /home/$USER/.bashrc
+echo source /mnt/resource/scratch/applications/OpenFOAM-6-version-6/etc/bashrc >>  /home/$USER/.bashrc
 
 NAMES=`cat /home/$USER/bin/nodeips.txt` #names from names.txt file
 for NAME in $NAMES; do
