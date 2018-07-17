@@ -5,8 +5,12 @@ HOST=`hostname`
 DOWN=$3
 echo $USER,$LICIP,$HOST,$DOWN
 
-wget -q http://azbenchmarkstorage.blob.core.windows.net/foambenchmarkstorage/20170524_PE_OpenFOAM.tgz -O /mnt/resource/scratch/INSTALLERS/OF_IMPI.tgz
-tar -xzf /mnt/resource/scratch/INSTALLERS/OF_IMPI.tgz -C /mnt/resource/scratch/applications/
+#wget -q http://azbenchmarkstorage.blob.core.windows.net/foambenchmarkstorage/20170524_PE_OpenFOAM.tgz -O /mnt/resource/scratch/INSTALLERS/OF_IMPI.tgz
+wget -O /mnt/resource/scratch/INSTALLERS/ -q http://dl.openfoam.org/source/6
+wget -O /mnt/resource/scratch/INSTALLERS/ -q http://dl.openfoam.org/third-party/6
+
+tar -xzf /mnt/resource/scratch/INSTALLERS/OpenFOAM-6-version-6.tar.gz -C /mnt/resource/scratch/applications/
+tar -xzf /mnt/resource/scratch/INSTALLERS/ThirdParty-6-version-6.tar.gz -C /mnt/resource/scratch/applications/
 rm /mnt/resource/scratch/INSTALLERS/*.tgz
 
 echo export HOSTS=/home/$USER/bin/nodenames.txt >> /home/$USER/.bashrc
