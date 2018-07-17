@@ -12,13 +12,13 @@
 				"DataSynapse",
 				"Exa_PowerFlow",
 				"OpenFOAM",
+				"OpenFOAMv6",
 				"Raw",
 				"StarCCM-10",
 				"StarCCM-11",
 				"StarCCM-12",
 				"StarCCM-1204R8",
 				"StarCCM-1206R8k",
-				"Baseline201712"
 			],
 			"type": "String",
 			"metadata": {
