@@ -29,5 +29,6 @@ for NAME in $NAMES; do
     
 done
 
+chown -R $USER:$USER /home/$USER/bin/*
 chown -R $USER:$USER /mnt/resource/scratch/*
 chown -R $USER:$USER /mnt/nfsshare
