@@ -12,7 +12,7 @@ Managed Disk baseline
 <td align="center">
 Deploy cluster to an New VNET with Managed Disk at 20180717
 <br><br>
-<a href="https://portal.azure.com/#create/Microsoft.Template/uri/https%3A%2F%2Fraw.githubusercontent.com%2Fhirtanak%2FAHOD-HPC%2Fmaster%2Fazuredeploy_manageddisk4.json" target="_blank">
+<a href="https://portal.azure.com/#create/Microsoft.Template/uri/https%3A%2F%2Fraw.githubusercontent.com%2Fhirtanak%2FAHOD-HPC%2Fmaster%2Fazuredeploy_20180717.json" target="_blank">
     <img src="http://azuredeploy.net/deploybutton.png" />
 </a>
 </td></tr>
