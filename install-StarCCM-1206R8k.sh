@@ -16,8 +16,8 @@ yum install -y libXext.x86_64 libSM.x86_64 libXt
 mkdir -p $SHARE_DATA/INSTALLERS/starccm+_12.06.010/
 
 #wget -q https://hirostpublicshare.blob.core.windows.net/solvers/STAR-CCM%2B12.04.010_01_linux-x86_64-r8.tar.gz -O $SHARE_DATA/INSTALLERS/STAR-CCM+12.04.010_01_linux-x86_64-r8.tar.gz
-wget -q https://storagekhi.blob.core.windows.net/khi2018storage/STAR-CCM%2B12.06.010_01_linux-x86_64-r8.tar.gz -O $SHARE_DATA/INSTALLERS/STAR-CCM+12.06.010_01_linux-x86_64-r8.tar.gz
-wget -q https://storagekhi.blob.core.windows.net/khi2018storage/$DOWN -O $SHARE_DATA/benchmark/$DOWN
+#wget -q https://storagekhi.blob.core.windows.net/khi2018storage/STAR-CCM%2B12.06.010_01_linux-x86_64-r8.tar.gz -O $SHARE_DATA/INSTALLERS/STAR-CCM+12.06.010_01_linux-x86_64-r8.tar.gz
+#wget -q https://storagekhi.blob.core.windows.net/khi2018storage/$DOWN -O $SHARE_DATA/benchmark/$DOWN
 
 #wget -q http://azbenchmarkstorage.blob.core.windows.net/cdadapcobenchmarkstorage/runAndRecord.java -O $SHARE_DATA/benchmark/runAndRecord.java
 #wget -q http://azbenchmarkstorage.blob.core.windows.net/cdadapcobenchmarkstorage/$DOWN -O $SHARE_DATA/benchmark/$DOWN
